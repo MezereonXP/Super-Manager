@@ -5,7 +5,7 @@ import { NzModalService, NzMessageService } from 'ng-zorro-antd';
   selector: 'header-storage',
   template: `
   <i nz-icon type="tool"></i>
-  清理本地缓存
+  {{ 'menu.clear.local.storage' | translate}}
   `,
   host: {
     '[class.d-block]': 'true',

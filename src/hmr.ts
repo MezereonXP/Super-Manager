@@ -11,7 +11,10 @@ export const hmrBootstrap = (
   bootstrap().then(mod => (ngModule = mod));
   module.hot.dispose(() => {
     const appRef: ApplicationRef = ngModule.injector.get(ApplicationRef);
-    const modalService = ngModule.injector.get(NzModalService, null) as NzModalService;
+    const modalService = ngModule.injector.get(
+      NzModalService,
+      null,
+    ) as NzModalService;
     if (modalService) modalService.closeAll();
     const elements = appRef.components.map(c => c.location.nativeElement);
     const makeVisible = createNewHosts(elements);
