@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "Alain",
-    "description": "Ng-zorro admin panel front-end framework"
+    "name": "人事后台管理系统",
+    "description": "用于管理人事等各种信息的后台"
   },
   "user": {
     "name": "Admin",
@@ -13,7 +13,7 @@
       "text": "主导航",
       "i18n": "menu.main",
       "group": true,
-      "hideInBreadcrumb": true,
+      "hideInBreadcrumb": false,
       "children": [
         {
           "text": "仪表盘",
