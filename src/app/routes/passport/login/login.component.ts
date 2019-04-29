@@ -3,12 +3,7 @@ import { Component, OnDestroy, Inject, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import {
-  SocialService,
-  SocialOpenType,
-  ITokenService,
-  DA_SERVICE_TOKEN,
-} from '@delon/auth';
+import { SocialService, SocialOpenType, ITokenService, DA_SERVICE_TOKEN } from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 import { StartupService } from '@core';
@@ -124,7 +119,7 @@ export class UserLoginComponent implements OnDestroy {
         this.tokenService.set(res.user);
         // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
         this.startupSrv.load().then(() => {
-          let url = this.tokenService.referrer.url || '/';
+          let url = this.tokenService.referrer!.url || '/';
           if (url.includes('/passport')) url = '/';
           this.router.navigateByUrl(url);
         });
