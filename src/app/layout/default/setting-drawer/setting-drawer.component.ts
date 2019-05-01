@@ -1,10 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  NgZone,
-  Inject,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, NgZone, Inject, ChangeDetectorRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { NzMessageService } from 'ng-zorro-antd';
 import { LazyService, copy, deepCopy } from '@delon/util';
@@ -254,11 +248,7 @@ export class SettingDrawerComponent {
         `;
         this.doc.body.appendChild(lessConfigNode);
       })
-      .then(() =>
-        this.lazy.loadScript(
-          'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
-        ),
-      )
+      .then(() => this.lazy.loadScript('https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js'))
       .then(() => {
         this.loadedLess = true;
       });
@@ -269,9 +259,7 @@ export class SettingDrawerComponent {
     const vars: any = {
       [`@primary-color`]: color,
     };
-    validKeys
-      .filter(key => key !== 'primary-color')
-      .forEach(key => (vars[`@${key}`] = data[key].value));
+    validKeys.filter(key => key !== 'primary-color').forEach(key => (vars[`@${key}`] = data[key].value));
     this.setLayout(ALAINDEFAULTVAR, vars);
     return vars;
   }
@@ -312,7 +300,7 @@ export class SettingDrawerComponent {
     nowData = nowData || {};
     const data = deepCopy(DEFAULT_VARS);
     Object.keys(data).forEach(key => {
-      const value = nowData[`@${key}`] || data[key].default || '';
+      const value = nowData![`@${key}`] || data[key].default || '';
       data[key].value = value === `@primary-color` ? this.color : value;
     });
     this.data = data;
@@ -323,9 +311,7 @@ export class SettingDrawerComponent {
   }
 
   private get validKeys(): string[] {
-    return Object.keys(this.data).filter(
-      key => this.data[key].value !== this.data[key].default,
-    );
+    return Object.keys(this.data).filter(key => this.data[key].value !== this.data[key].default);
   }
 
   apply() {
