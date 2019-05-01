@@ -108,7 +108,9 @@ export class DefaultInterceptor implements HttpInterceptor {
     }
 
     const newReq = req.clone({ url });
-    return next.handle(newReq).pipe(
+    const newReqWithCredential = req.clone({ url, withCredentials:true })
+    // if (url.indexOf('api')!==-1)
+    return next.handle(newReqWithCredential).pipe(
       mergeMap((event: any) => {
         // 允许统一对请求错误处理
         if (event instanceof HttpResponseBase)
@@ -118,5 +120,16 @@ export class DefaultInterceptor implements HttpInterceptor {
       }),
       catchError((err: HttpErrorResponse) => this.handleData(err)),
     );
+ 
+    // return next.handle(newReq).pipe(
+    //   mergeMap((event: any) => {
+    //     // 允许统一对请求错误处理
+    //     if (event instanceof HttpResponseBase)
+    //       return this.handleData(event);
+    //     // 若一切都正常，则后续操作
+    //     return of(event);
+    //   }),
+    //   catchError((err: HttpErrorResponse) => this.handleData(err)),
+    // );
   }
 }

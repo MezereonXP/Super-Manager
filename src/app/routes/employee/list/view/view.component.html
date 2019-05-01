@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <div class="modal-title">查看 {{ record.id }} 信息</div>
+</div>
+<nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
+<div sv-container *ngIf="i">
+  <sv label="姓名">{{ i.name }}</sv>
+  <sv label="性别">{{ i.sex }}</sv>
+  <sv label="年龄">{{ i.age }}</sv>
+  <sv label="身份证号">{{ i.idcard }}</sv>
+  <sv label="联系地址">{{ i.address }}</sv>
+  <sv label="电话">{{ i.telephone }}</sv>
+  <sv label="合同时间">{{ formatDate(i.entrytime) }}</sv>
+  <sv label="等级">{{ i.level }}</sv>
+  <sv label="工资">{{ i.salary }}</sv>
+  <sv label="创建时间">{{ formatDate(i.createtime) }}</sv>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

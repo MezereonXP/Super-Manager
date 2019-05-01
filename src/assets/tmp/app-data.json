@@ -10,6 +10,67 @@
   },
   "menu": [
     {
+      "text": "人事管理",
+      "i18n": "menu.hr",
+      "group": true,
+      "hideInBreadcrumb": false,
+      "children": [
+        {
+          "text": "员工信息管理",
+          "i18n": "menu.empolyee",
+          "icon": "anticon anticon-user",
+          "children": [
+            {
+              "text": "员工信息列表",
+              "link": "/empolyee/list",
+              "i18n": "menu.empolyee.list"
+            }  
+          ]
+        },
+        {
+          "text": "奖惩信息管理",
+          "i18n": "menu.judge",
+          "icon": "anticon anticon-edit",
+          "children": [
+            {
+              "text": "奖惩信息列表",
+              "link": "/judge/list",
+              "i18n": "menu.judge.list"
+            }  
+          ]
+        },
+        {
+          "text": "考核信息管理",
+          "i18n": "menu.assessment",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "考核信息列表",
+              "link": "/assessment/list",
+              "i18n": "menu.assessment.list"
+            }  
+          ]
+        },
+        {
+          "text": "各类提醒",
+          "i18n": "menu.remind",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "生日员工列表",
+              "link": "/remind/birth",
+              "i18n": "menu.remind.birth"
+            },
+            {
+              "text": "合同到期列表",
+              "link": "/remind/contract",
+              "i18n": "menu.remind.contract"
+            }  
+          ]
+        }
+      ]
+    },
+    {
       "text": "主导航",
       "i18n": "menu.main",
       "group": true,

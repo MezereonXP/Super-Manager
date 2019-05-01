@@ -19,6 +19,7 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 import { CallbackComponent } from './callback/callback.component';
 import { UserLockComponent } from './passport/lock/lock.component';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -40,6 +41,10 @@ const routes: Routes = [
       { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
       { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
       { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
+      { path: 'empolyee', loadChildren: './employee/employee.module#EmployeeModule'},
+      { path: 'judge', loadChildren: './judge/judge.module#JudgeModule'},
+      { path: 'assessment', loadChildren: './assessment/assessment.module#AssessmentModule'},
+      { path: 'remind', loadChildren: './remind/remind.module#RemindModule'},
       // Exception
       { path: 'exception', loadChildren: './exception/exception.module#ExceptionModule' },
     ],

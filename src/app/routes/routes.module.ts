@@ -1,3 +1,4 @@
+import { EmployeeModule } from './employee/employee.module';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@shared';
@@ -14,6 +15,7 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 // single pages
 import { UserLockComponent } from './passport/lock/lock.component';
 import { CallbackComponent } from './callback/callback.component';
+import { from } from 'rxjs';
 
 const COMPONENTS = [
   DashboardV1Component,
@@ -31,7 +33,7 @@ const COMPONENTS = [
 const COMPONENTS_NOROUNT = [];
 
 @NgModule({
-  imports: [SharedModule, RouteRoutingModule],
+  imports: [SharedModule, RouteRoutingModule, EmployeeModule],
   declarations: [...COMPONENTS, ...COMPONENTS_NOROUNT],
   entryComponents: COMPONENTS_NOROUNT
 })

@@ -1,3 +1,4 @@
+import { DataVModule } from './../../data-v/data-v.module';
 import { SettingsService, _HttpClient } from '@delon/theme';
 import { Component, OnDestroy, Inject, Optional } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import {
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 import { StartupService } from '@core';
-
+ 
 @Component({
   selector: 'passport-login',
   templateUrl: './login.component.html',
@@ -37,6 +38,7 @@ export class UserLoginComponent implements OnDestroy {
     private startupSrv: StartupService,
     public http: _HttpClient,
     public msg: NzMessageService,
+    private settingService: SettingsService
   ) {
     this.form = fb.group({
       userName: [null, [Validators.required, Validators.minLength(4)]],
@@ -108,20 +110,24 @@ export class UserLoginComponent implements OnDestroy {
     // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
     // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
     this.http
-      .post('/login/account?_allow_anonymous=true', {
+      .get('http://47.93.11.200:8800/auth/login?_allow_anonymous=true', {
         type: this.type,
-        userName: this.userName.value,
+        account: this.userName.value,
         password: this.password.value,
       })
       .subscribe((res: any) => {
-        if (res.msg !== 'ok') {
+        if (!res.status) {
           this.error = res.msg;
           return;
         }
         // 清空路由复用信息
         this.reuseTabService.clear();
         // 设置用户Token信息
-        this.tokenService.set(res.user);
+        this.tokenService.set(res.data);
+        this.settingService.setUser({ name: res.data.name, 
+                                      avatar: "./assets/tmp/img/avatar.jpg",
+                                      email: res.data.email});
+        // this.router.navigateByUrl('/');
         // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
         this.startupSrv.load().then(() => {
           let url = this.tokenService.referrer.url || '/';
