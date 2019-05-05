@@ -6,6 +6,7 @@ import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { EmployeeListEditComponent } from './edit/edit.component';
 import { EmployeeListViewComponent } from './view/view.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-employee-list',
@@ -44,30 +45,47 @@ export class EmployeeListComponent implements OnInit {
         {   text: '查看', 
             click: (item: any)=>{ 
                     this.modal.create(EmployeeListViewComponent, {record:{id: item.id}})
-                      .subscribe(res=>{})
+                      .subscribe(res=>this.st.reload())
                 } 
         },
         {   text: '编辑', 
             type: 'static', 
             click: (item: any)=>{ 
                 this.modal.create(EmployeeListEditComponent, {record:{id: item.id}})
-                .subscribe(res=>{})
+                .subscribe(res=>this.st.reload())
               }
+        },
+        {
+          icon: 'delete',
+          type: 'del',
+          click: (record, modal, comp) => {
+            this.http.get("http://47.93.11.200:8800/api/deleteEmployeeById", {
+                id: record.id
+            }).subscribe(res => {
+              if(res['status']){
+                this.message.success(`成功删除【${record.name}】`);
+                comp!.removeRow(record);
+              }
+            })
+            
+          }
         }
       ]
     }
   ];
 
-  constructor(private http: _HttpClient, private modal: ModalHelper) { }
+  constructor(private http: _HttpClient, 
+              private modal: ModalHelper,
+              private message: NzMessageService) { }
 
   ngOnInit() { 
     
   }
 
   add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
+    this.modal
+      .createStatic(EmployeeListEditComponent, { i:{ id:0 },record: { id: 0 } })
+      .subscribe(() => this.st.reload());
   }
 
 }

@@ -12,29 +12,27 @@ export class JudgeListEditComponent implements OnInit {
   i: any;
   schema: SFSchema = {
     properties: {
-      no: { type: 'string', title: '编号' },
-      owner: { type: 'string', title: '姓名', maxLength: 15 },
-      callNo: { type: 'number', title: '调用次数' },
-      href: { type: 'string', title: '链接', format: 'uri' },
-      description: { type: 'string', title: '描述', maxLength: 140 },
+      id: { type: 'string', title: '编号' },
+      status: { type: 'number', title: '状态', maxLength: 15 },
+      operate: { type: 'number', title: '操作' },
+      reason: { type: 'string', title: '原因' },
+      operatorid: { type: 'number', title: '操作者ID'},
+      createtime: { type: 'number', title: '创建时间', format: 'date' }
     },
-    required: ['owner', 'callNo', 'href', 'description'],
+    required: ['status', 'operate', 'reason', 'operatorid'],
   };
   ui: SFUISchema = {
     '*': {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
-      widget: 'text'
-    },
-    $href: {
-      widget: 'string',
-    },
-    $description: {
+    $reason: {
       widget: 'textarea',
       grid: { span: 24 },
     },
+    $id: {
+      widget: 'text'
+    }
   };
 
   constructor(
@@ -45,14 +43,22 @@ export class JudgeListEditComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.record.id > 0)
-    this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
+    this.http.get(`http://47.93.11.200:8800/api/getAllRewardpunish?page=1&size=1&id=${this.record.id}`).subscribe(res => (this.i = res['data'][0]));
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    if (this.record.id === 0) {
+      value.id = null;
+      this.http.post(`http://47.93.11.200:8800/api/addRewardpunish`, value).subscribe(res => {
+        this.msgSrv.success('添加成功');
+        this.modal.close(true);
+      });
+    } else {
+      this.http.post(`http://47.93.11.200:8800/api/reviseRewardpunish?id=${this.record.id}`, value).subscribe(res => {
+        this.msgSrv.success('保存成功');
+        this.modal.close(true);
+      });
+    }
   }
 
   close() {

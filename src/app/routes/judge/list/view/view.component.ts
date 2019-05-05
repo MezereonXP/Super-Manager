@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
@@ -13,14 +14,19 @@ export class JudgeListViewComponent implements OnInit {
   constructor(
     private modal: NzModalRef,
     public msgSrv: NzMessageService,
-    public http: _HttpClient
+    public http: _HttpClient,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
-    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+    this.http.get(`http://47.93.11.200:8800/api/getAllRewardpunish?page=1&size=1&id=${this.record.id}`).subscribe(res => this.i = res['data'][0]);
   }
 
   close() {
     this.modal.destroy();
+  }
+
+  formatDate(date) {
+    return this.datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
   }
 }

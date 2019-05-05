@@ -12,26 +12,24 @@ export class AssessmentListEditComponent implements OnInit {
   i: any;
   schema: SFSchema = {
     properties: {
-      no: { type: 'string', title: '编号' },
-      owner: { type: 'string', title: '姓名', maxLength: 15 },
-      callNo: { type: 'number', title: '调用次数' },
-      href: { type: 'string', title: '链接', format: 'uri' },
-      description: { type: 'string', title: '描述', maxLength: 140 },
+      id: { type: 'string', title: '编号' },
+      content: { type: 'string', title: '考核内容' },
+      result: { type: 'number', title: '考核结果' },
+      checktime: { type: 'string', title: '考核时间', format:'date' },
+      checkemployeeid: { type: 'number', title: '考核员工ID'},
+      createtime: { type: 'string', title: '创建时间', format: 'date' }
     },
-    required: ['owner', 'callNo', 'href', 'description'],
+    required: ['id', 'content', 'result', 'checktime'],
   };
   ui: SFUISchema = {
     '*': {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
+    $id: {
       widget: 'text'
     },
-    $href: {
-      widget: 'string',
-    },
-    $description: {
+    $content: {
       widget: 'textarea',
       grid: { span: 24 },
     },
@@ -45,14 +43,22 @@ export class AssessmentListEditComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.record.id > 0)
-    this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
+    this.http.get(`http://47.93.11.200:8800/api/getAllCheckEmployee?page=1&size=1&id=${this.record.id}`).subscribe(res => (this.i = res['data'][0]));
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    if (this.record.id === 0) {
+      value.id = null;
+      this.http.post(`http://47.93.11.200:8800/api/addCheckEmployee`, value).subscribe(res => {
+        this.msgSrv.success('添加成功');
+        this.modal.close(true);
+      });
+    } else {
+      this.http.post(`http://47.93.11.200:8800/api/reviseCheckEmployee?id=${this.record.id}`, value).subscribe(res => {
+        this.msgSrv.success('保存成功');
+        this.modal.close(true);
+      });
+    }
   }
 
   close() {

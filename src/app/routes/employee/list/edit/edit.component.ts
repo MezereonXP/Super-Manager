@@ -57,10 +57,19 @@ export class EmployeeListEditComponent implements OnInit {
   }
 
   save(value: any) {
-    this.http.post(`http://47.93.11.200:8800/api/reviseEmployee?id=${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    if (this.record.id === 0) {
+      value.id = null;
+      this.http.post(`http://47.93.11.200:8800/api/addEmployee`, value).subscribe(res => {
+        this.msgSrv.success('添加成功');
+        this.modal.close(true);
+      });
+    } else {
+      this.http.post(`http://47.93.11.200:8800/api/reviseEmployee?id=${this.record.id}`, value).subscribe(res => {
+        this.msgSrv.success('保存成功');
+        this.modal.close(true);
+      });
+    }
+
   }
 
   close() {

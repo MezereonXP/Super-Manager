@@ -32,7 +32,16 @@ export class RemindContractComponent implements OnInit {
     }
   ];
 
+  customColumns = [
+    { label: '只显示到期合同', value: 'isShowDeadContract', checked: true }
+  ];
+  
   constructor(private http: _HttpClient, private modal: ModalHelper) { }
+
+  isChoose(key: string): boolean {
+    window.alert(key)
+    return !!this.customColumns.find(w => w.value === key && w.checked);
+  }
 
   ngOnInit() { }
 
