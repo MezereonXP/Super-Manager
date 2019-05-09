@@ -47,7 +47,7 @@ cache:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: b5d39746bb624930254fffa98e800a296f7dafce 
+  github_token: 95044c9e6b83fd074e8902859ee7c6b12fdcb90d 
   keep_history: true
   target_branch: gh_pages # default target branch gh_pages
   on:
