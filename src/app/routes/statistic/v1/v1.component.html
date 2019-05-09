@@ -1,0 +1,91 @@
+<div class="alain-default__content-title">
+  <h1>
+    Dashboard
+    <small>Welcome !</small>
+  </h1>
+</div>
+<quick-menu>
+  <nz-list [nzBordered]="false" [nzSplit]="false">
+    <nz-list-item>
+      <a routerLink="/">Home</a>
+    </nz-list-item>
+    <nz-list-item>
+      <a routerLink="/widgets">Widgets</a>
+    </nz-list-item>
+    <nz-list-item>
+      <a routerLink="/style/typography">typography</a>
+    </nz-list-item>
+    <nz-list-item>
+      <a routerLink="/style/gridmasonry">gridmasonry</a>
+    </nz-list-item>
+    <nz-list-item>
+      <a routerLink="/pro/result/success">success result</a>
+    </nz-list-item>
+  </nz-list>
+</quick-menu>
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
+    <div nz-row nzType="flex" nzAlign="middle" class="bg-primary rounded-md">
+      <div nz-col nzSpan="12" class="p-md text-white">
+        <div class="h2 mt0">{{employeeCount}}</div>
+        <p class="text-nowrap mb0">员工数量</p>
+      </div>
+      <div nz-col nzSpan="12">
+        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite" tooltipType="mini"></g2-mini-bar>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
+    <div nz-row nzType="flex" nzAlign="middle" class="bg-success rounded-md">
+      <div nz-col nzSpan="12" class="p-md text-white">
+        <div class="h2 mt0">{{cvDeliverTime}}</div>
+        <p class="text-nowrap mb0">投简历数量</p>
+      </div>
+      <div nz-col nzSpan="12">
+        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite" tooltipType="mini"></g2-mini-bar>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
+    <div nz-row nzType="flex" nzAlign="middle" class="bg-orange rounded-md">
+      <div nz-col nzSpan="12" class="p-md text-white">
+        <div class="h2 mt0">${{averagePay}}</div>
+        <p class="text-nowrap mb0">平均薪资</p>
+      </div>
+      <div nz-col nzSpan="12">
+        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite" tooltipType="mini"></g2-mini-bar>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
+    <div nz-row nzType="flex" nzAlign="middle" class="bg-magenta rounded-md">
+      <div nz-col nzSpan="12" class="p-md text-white">
+        <div class="h2 mt0">{{averageAge}}</div>
+        <p class="text-nowrap mb0">员工平均年龄</p>
+      </div>
+      <div nz-col nzSpan="12">
+        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite" tooltipType="mini"></g2-mini-bar>
+      </div>
+    </div>
+  </div>
+</div>
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzMd="12">
+    <nz-card [nzBordered]="false" [nzTitle]="salesTitle">
+      <ng-template #salesTitle>
+        部门绩效统计
+        <small class="text-sm font-weight-normal">Business Expectations & Retail Sales Statistics</small>
+      </ng-template>
+      <g2-bar *ngIf="salesData" height="275" [data]="salesData"></g2-bar>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzMd="12">
+    <nz-card [nzBordered]="false" [nzTitle]="employeeTitle">
+      <ng-template #employeeTitle>
+        员工Top10
+        <small class="text-sm font-weight-normal">Business Expectations & Retail Sales Statistics</small>
+      </ng-template>
+      <g2-bar *ngIf="employeeData" height="275" [data]="employeeData"></g2-bar>
+    </nz-card>
+  </div>
+</div>

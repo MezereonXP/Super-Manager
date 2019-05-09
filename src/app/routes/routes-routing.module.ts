@@ -27,7 +27,7 @@ const routes: Routes = [
     canActivate: [SimpleGuard],
     canActivateChild: [SimpleGuard],
     children: [
-      { path: '', redirectTo: 'dashboard/v1', pathMatch: 'full' },
+      { path: '', redirectTo: 'statistic/show', pathMatch: 'full' },
       { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
       { path: 'dashboard/v1', component: DashboardV1Component },
       { path: 'dashboard/analysis', component: DashboardAnalysisComponent },
@@ -45,6 +45,12 @@ const routes: Routes = [
       { path: 'judge', loadChildren: './judge/judge.module#JudgeModule'},
       { path: 'assessment', loadChildren: './assessment/assessment.module#AssessmentModule'},
       { path: 'remind', loadChildren: './remind/remind.module#RemindModule'},
+      { path: 'department', loadChildren: './department/department.module#DepartmentModule'},
+      { path: 'post', loadChildren: './post/post.module#PostModule'},
+      { path: 'advertise', loadChildren: './advertise/advertise.module#AdvertiseModule'},
+      { path: 'advertiser', loadChildren: './advertiser/advertiser.module#AdvertiserModule'},
+      { path: 'cv', loadChildren: './cv/cv.module#CvModule'},
+      { path: 'statistic', loadChildren: './statistic/statistic.module#StatisticModule'},
       // Exception
       { path: 'exception', loadChildren: './exception/exception.module#ExceptionModule' },
     ],

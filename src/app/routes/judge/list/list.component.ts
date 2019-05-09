@@ -26,8 +26,25 @@ export class JudgeListComponent implements OnInit {
   columns: STColumn[] = [
     { title: '编号', index: 'id' },
     // { title: '头像', type:'img', width:'50px', index:'imgSrc'},
-    { title: '状态', index: 'status' },
-    { title: '操作',  index: 'operate' },
+    {
+      title: '状态',
+      type: 'badge',
+      index: 'status',
+      badge: {
+        1: { text: '惩罚', color: 'error' },
+        2: { text: '奖励', color: 'success'}
+      }
+    },
+    {
+      title: '操作',
+      type: 'badge',
+      index: 'operate',
+      badge: {
+        1: { text: '工资调整', color: 'processing' },
+        2: { text: '岗位调整', color: 'processing' },
+        3: { text: '其他', color: 'processing'}
+      }
+    },
     { title: '理由', index: 'reason'},
     { title: '时间', type: 'date', index: 'createtime' },
     {

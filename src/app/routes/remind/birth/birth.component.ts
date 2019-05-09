@@ -1,8 +1,9 @@
 import { NzMessageService } from 'ng-zorro-antd';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import { STColumn, STComponent, STData, STColumnButton } from '@delon/abc';
 import { SFSchema } from '@delon/form';
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-remind-birth',
@@ -31,19 +32,36 @@ export class RemindBirthComponent implements OnInit {
     { title: '年龄', type:'number', index: 'age'},
     { title: '入职时间', type: 'date', index: 'createtime' },
     {
+      title: '状态',
+      type: 'badge',
+      index: 'issendemail',
+      badge: {
+        1: { text: '已发送', color: 'success' },
+        0: { text: '未发送', color: 'default'}
+      }
+    },
+    {
       title: '',
       buttons: [
-        {   text: '发送提醒', 
+        {   
+            text: '发送提醒', 
             click: (record, modal, comp)=>{
                 this.http.get("http://47.93.11.200:8800/api/sendBirthEmail", {
                   id: record.id
                 }).subscribe(res => {
                   if(res['status']){
                     this.message.success(`成功发送【${record.name}】`);
-                    comp!.removeRow(record);
+                    comp.reload();
                   }
                 })
-            } 
+              },
+            iif: (item: STData, btn: STColumnButton, column: STColumn)=>{
+              if (item.issendemail === 1) {
+                return false;
+              } else {
+                return true;
+              }
+            }            
         }
       ]
     }

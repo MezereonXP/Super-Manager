@@ -1,54 +1,48 @@
 import { NzMessageService } from 'ng-zorro-antd';
-import { AssessmentListEditComponent } from './edit/edit.component';
-import { AssessmentListViewComponent } from './view/view.component';
+import { CvListEditComponent } from './edit/edit.component';
+import { CvListViewComponent } from './view/view.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 
 @Component({
-  selector: 'app-assessment-list',
+  selector: 'app-cv-list',
   templateUrl: './list.component.html',
 })
-export class AssessmentListComponent implements OnInit {
-  url = `http://47.93.11.200:8800/api/getAllCheckEmployee`;
+export class CvListComponent implements OnInit {
+  url = `http://47.93.11.200:8800/api/getAllCv`;
+
   reqRename = { pi:'page', ps:'size'};
   resRename = { list:'data'};
+
   searchSchema: SFSchema = {
     properties: {
       id: {
         type: 'string',
         title: '编号'
       },
-      CheckEmployeetime: {
+      createtime: {
         type: 'string',
-        format: 'date',
-        title: '考核时间'
+        title: '创建时间',
+        format: 'date'
       }
     }
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: '编号', index: 'id' },
-    // { title: '头像', type:'img', width:'50px', index:'imgSrc'},
-    { title: '内容', index: 'content' },
-    { title: '结果',  index: 'result', type:'number' },
-    { title: '考核时间', index: 'checktime', type:'date'},
-    { title: '考核员工ID', index: 'checkemployeeid', type:'number'},
+    { title: '简历ID', index: 'id' },
+    { title: '简历文件地址', index: 'filesrc' },
     { title: '创建时间', type: 'date', index: 'createtime' },
+    { title: '修改时间', type: 'date', index: 'revisetime' },
     {
       title: '',
       buttons: [
-        {   text: '查看', 
-            click: (item: any)=>{ 
-                    this.modal.create(AssessmentListViewComponent, {record:{id: item.id}})
-                      .subscribe(res=>this.st.reload())
-                } 
-        },
-        {   text: '编辑', 
+        {   
+            text: '编辑', 
             type: 'static', 
             click: (item: any)=>{ 
-                this.modal.create(AssessmentListEditComponent, {record:{id: item.id}})
+                this.modal.create(CvListEditComponent, {record:{id: item.id}})
                 .subscribe(res=>this.st.reload())
               }
         },
@@ -56,7 +50,7 @@ export class AssessmentListComponent implements OnInit {
           icon: 'delete',
           type: 'del',
           click: (record, modal, comp) => {
-            this.http.get("http://47.93.11.200:8800/api/deleteCheckEmployeeById", {
+            this.http.get("http://47.93.11.200:8800/api/deleteCvById", {
                 id: record.id
             }).subscribe(res => {
               if(res['status']){
@@ -66,8 +60,9 @@ export class AssessmentListComponent implements OnInit {
             })
             
           }
-        }]
-      }
+        }
+      ]
+    }
   ];
 
   constructor(private http: _HttpClient, 
@@ -78,7 +73,7 @@ export class AssessmentListComponent implements OnInit {
 
   add() {
     this.modal
-      .createStatic(AssessmentListEditComponent, { i:{ id:0 }, record: { id: 0 } })
+      .createStatic(CvListEditComponent, { i:{ id:0 }, record: { id: 0 } })
       .subscribe(() => this.st.reload());
   }
 

@@ -84,7 +84,7 @@ export class EmployeeListComponent implements OnInit {
 
   add() {
     this.modal
-      .createStatic(EmployeeListEditComponent, { i:{ id:0 },record: { id: 0 } })
+      .createStatic(EmployeeListEditComponent, { i:{ id:0 }, record: { id: 0 } })
       .subscribe(() => this.st.reload());
   }
 
