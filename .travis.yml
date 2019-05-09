@@ -43,3 +43,12 @@ cache:
   yarn: true
   directories:
     - ./node_modules/
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: b5d39746bb624930254fffa98e800a296f7dafce 
+  keep_history: true
+  target_branch: gh_pages # default target branch gh_pages
+  on:
+    branch: master
