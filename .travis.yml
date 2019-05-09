@@ -50,6 +50,6 @@ deploy:
   github_token: $GITHUB_TOKEN 
   keep_history: true
   local_dir: dist
-  target_branch: gh_pages # default target branch gh_pages
+  target_branch: gh-pages # default target branch gh_pages
   on:
     branch: master
