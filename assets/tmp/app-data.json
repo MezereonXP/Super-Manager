@@ -1,0 +1,146 @@
+{
+  "app": {
+    "name": "Alain",
+    "description": "Ng-zorro admin panel front-end framework"
+  },
+  "user": {
+    "name": "Admin",
+    "avatar": "./assets/tmp/img/avatar.jpg",
+    "email": "cipchk@qq.com"
+  },
+  "menu": [
+    {
+      "text": "人事管理",
+      "i18n": "menu.hr",
+      "group": true,
+      "hideInBreadcrumb": false,
+      "children": [
+        {
+          "text": "员工信息管理",
+          "i18n": "menu.empolyee",
+          "icon": "anticon anticon-user",
+          "children": [
+            {
+              "text": "员工信息列表",
+              "link": "/empolyee/list",
+              "i18n": "menu.empolyee.list"
+            }  
+          ]
+        },
+        {
+          "text": "奖惩信息管理",
+          "i18n": "menu.judge",
+          "icon": "anticon anticon-edit",
+          "children": [
+            {
+              "text": "奖惩信息列表",
+              "link": "/judge/list",
+              "i18n": "menu.judge.list"
+            }  
+          ]
+        },
+        {
+          "text": "考核信息管理",
+          "i18n": "menu.assessment",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "考核信息列表",
+              "link": "/assessment/list",
+              "i18n": "menu.assessment.list"
+            }  
+          ]
+        },
+        {
+          "text": "各类提醒",
+          "i18n": "menu.remind",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "生日员工列表",
+              "link": "/remind/birth",
+              "i18n": "menu.remind.birth"
+            },
+            {
+              "text": "合同到期列表",
+              "link": "/remind/contract",
+              "i18n": "menu.remind.contract"
+            }  
+          ]
+        },
+        {
+          "text": "部门管理",
+          "i18n": "menu.department",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "部门信息列表",
+              "link": "/department/list",
+              "i18n": "menu.department.list"
+            }  
+          ]
+        },
+        {
+          "text": "简历管理",
+          "i18n": "menu.cv",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "简历信息列表",
+              "link": "/cv/list",
+              "i18n": "menu.cv.list"
+            }  
+          ]
+        },
+        {
+          "text": "招聘管理",
+          "i18n": "menu.advertise",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "招聘信息列表",
+              "link": "/advertise/list",
+              "i18n": "menu.advertise.list"
+            }  
+          ]
+        },
+        {
+          "text": "招聘人员信息管理",
+          "i18n": "menu.advertiser",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "招聘人员信息列表",
+              "link": "/advertiser/list",
+              "i18n": "menu.advertiser.list"
+            }  
+          ]
+        },
+        {
+          "text": "岗位管理",
+          "i18n": "menu.post",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "岗位信息列表",
+              "link": "/post/list",
+              "i18n": "menu.post.list"
+            }  
+          ]
+        },
+        {
+          "text": "统计信息",
+          "i18n": "menu.statistic",
+          "icon": "anticon anticon-monitor",
+          "children": [
+            {
+              "text": "统计信息显示",
+              "link": "/statistic/show",
+              "i18n": "menu.statistic.v1"
+            }  
+          ]
+        }
+      ]
+    }
+  ]
+}
