@@ -15,7 +15,17 @@ export class AdvertiseListEditComponent implements OnInit {
       id: { type: 'string', title: '编号' },
       content: { type: 'string', title: '招聘内容', maxLength: 500 },
       hrids: { type: 'string', title: '负责人ID' },
-      status: { type: 'number', title: '状态' },      
+      status: { type: 'number', title: '状态',
+        enum: [
+          { label: '未开始', value: 0 },
+          { label: '简历接受中', value: 1 },
+          { label: '停止接收简历', value: 2 },
+        ],
+        default: 0,
+        ui: {
+          widget: 'select',
+        }
+      },      
       createtime: { type: 'number', title: '创建时间', format:'date' },
       revisetime: { type: 'number', title: '更新时间', format:'date' },
     },

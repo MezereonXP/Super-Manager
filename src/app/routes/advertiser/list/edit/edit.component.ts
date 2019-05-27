@@ -15,7 +15,20 @@ export class AdvertiserListEditComponent implements OnInit {
       id: { type: 'string', title: '编号' },
       postid: { type: 'number', title: '岗位ID'},
       cvid: { type: 'number', title: '简历ID' },
-      status: { type: 'number', title: '状态' },
+      status: { type: 'number', title: '状态',
+        enum: [
+          { label: '未投简历', value: 0},
+          { label: '简历待审核', value: 1 },
+          { label: '简历未通过', value: 2 },
+          { label: '面试中', value: 3},
+          { label: '面试已通过', value: 4},
+          { label: '面试未通过', value: 5}
+        ],
+        default: 0,
+        ui: {
+          widget: 'select',
+        }
+      },
       createtime: { type: 'number', title: '创建时间', format:'date' },
       revisetime: { type: 'number', title: '更新时间', format:'date' },
     },

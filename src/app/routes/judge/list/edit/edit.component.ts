@@ -13,10 +13,31 @@ export class JudgeListEditComponent implements OnInit {
   schema: SFSchema = {
     properties: {
       id: { type: 'string', title: '编号' },
-      status: { type: 'number', title: '状态', maxLength: 15 },
-      operate: { type: 'number', title: '操作' },
+      status: { type: 'number', title: '状态', maxLength: 15, minimum: 1, maximum: 2,
+        enum: [
+          { label: '奖励', value: 1 },
+          { label: '惩罚', value: 2 },
+        ],
+        default: 1,
+        ui: {
+          widget: 'select',
+        }
+      },
+      operate: { 
+        type: 'number', title: '操作', minimum: 1, maximum: 3,
+        enum: [
+          { label: '薪酬调整', value: 1 },
+          { label: '岗位调整', value: 2 },
+          { label: '其他', value: 3 },
+        ],
+        default: 1,
+        ui: {
+          widget: 'select',
+        }
+      },
       reason: { type: 'string', title: '原因' },
       operatorid: { type: 'number', title: '操作者ID'},
+      employeeid: { type: 'number', title: '员工ID'},
       createtime: { type: 'number', title: '创建时间', format: 'date' }
     },
     required: ['status', 'operate', 'reason', 'operatorid'],
