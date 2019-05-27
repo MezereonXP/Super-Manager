@@ -25,6 +25,7 @@ export class JudgeListComponent implements OnInit {
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
     { title: '编号', index: 'id' },
+    { title: '员工ID', index: 'employeeid' },
     // { title: '头像', type:'img', width:'50px', index:'imgSrc'},
     {
       title: '状态',

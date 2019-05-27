@@ -68,9 +68,9 @@ export class PostListComponent implements OnInit {
   ngOnInit() { }
 
   add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
+    this.modal
+      .createStatic(PostListEditComponent, { i:{ id:0 },record: { id: 0 } })
+      .subscribe(() => this.st.reload());
   }
 
 }

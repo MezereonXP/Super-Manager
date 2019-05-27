@@ -2,7 +2,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { AdvertiserListEditComponent } from './edit/edit.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 
 @Component({
@@ -11,6 +11,8 @@ import { SFSchema } from '@delon/form';
 })
 export class AdvertiserListComponent implements OnInit {
   url = `http://47.93.11.200:8800/api/getAllAdvertiser`;
+
+  departMap: {[index:string]: string} = {};
 
   reqRename = { pi:'page', ps:'size'};
   resRename = { list:'data'};
@@ -31,7 +33,7 @@ export class AdvertiserListComponent implements OnInit {
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
     { title: '编号', index: 'id' },
-    { title: '岗位ID', index: 'postid' },
+    { title: '岗位', index: 'postid', format: (item: STData, col:STColumn)=>{ return this.departMap[item.postid]; } },
     { title: '简历ID', index: 'cvid' },
     {
       title: '状态',
@@ -83,7 +85,15 @@ export class AdvertiserListComponent implements OnInit {
               private modal: ModalHelper,
               private message: NzMessageService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.http.get(`http://47.93.11.200:8800/api/getAllPost?page=1&size=10000`).subscribe(
+      (res: any) => {
+        res.data.forEach(element => {
+          this.departMap[element.id+'']=element.name;
+        });
+      }
+    )
+  }
 
   add() {
     this.modal

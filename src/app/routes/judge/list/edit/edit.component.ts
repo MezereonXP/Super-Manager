@@ -40,7 +40,7 @@ export class JudgeListEditComponent implements OnInit {
       employeeid: { type: 'number', title: '员工ID'},
       createtime: { type: 'number', title: '创建时间', format: 'date' }
     },
-    required: ['status', 'operate', 'reason', 'operatorid'],
+    required: ['status', 'operate', 'reason', 'operatorid', 'employeeid', 'createtime'],
   };
   ui: SFUISchema = {
     '*': {

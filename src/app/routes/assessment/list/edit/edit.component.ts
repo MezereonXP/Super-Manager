@@ -14,7 +14,7 @@ export class AssessmentListEditComponent implements OnInit {
     properties: {
       id: { type: 'string', title: '编号' },
       content: { type: 'string', title: '考核内容' },
-      result: { type: 'number', title: '考核结果' },
+      result: { type: 'number', title: '考核结果', maximum: 1, minimum: 0 },
       checktime: { type: 'string', title: '考核时间', format:'date' },
       checkemployeeid: { type: 'number', title: '考核员工ID'},
       createtime: { type: 'string', title: '创建时间', format: 'date' }

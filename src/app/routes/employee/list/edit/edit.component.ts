@@ -25,7 +25,7 @@ export class EmployeeListEditComponent implements OnInit {
       salary: { type: 'number', title: '工资' },
       createtime: { type: 'number', title: '创建时间', format: 'date' }
     },
-    required: ['id', 'name', 'sex', 'createtime'],
+    required: ['id', 'name', 'age', 'sex', 'createtime', 'idcard', 'address', 'telephone', 'entrytime', 'salary', 'level'],
   };
   ui: SFUISchema = {
     '*': {
